@@ -2,17 +2,18 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
 
+def firebaseVersion = '10.0.0'
 def module_version = '0.1.1'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.0"
+    buildToolsVersion "26.0.0"
 
     defaultConfig {
-        minSdkVersion 19
+        minSdkVersion 21
         targetSdkVersion 25
         versionCode 1
-        versionName "0.1"
+        versionName "1.0"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -30,14 +31,14 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+    compile "com.google.firebase:firebase-core:$firebaseVersion"
+    compile "com.google.firebase:firebase-storage:$firebaseVersion"
+    compile "com.google.firebase:firebase-config:$firebaseVersion"
+    compile "com.google.firebase:firebase-auth:$firebaseVersion"
+    compile "com.google.firebase:firebase-crash:$firebaseVersion"
+    compile project(path: ':android')
     compile 'com.android.support:appcompat-v7:25.3.1'
-    testCompile(
-            'junit:junit:4.12',
-            'org.mockito:mockito-core:1.10.19',
-            'org.hamcrest:hamcrest-core:1.3',
-            'org.hamcrest:hamcrest-library:1.3'
-    )
-
+    testCompile 'junit:junit:4.12'
 }
 
 task sourcesJar(type: Jar){
@@ -66,13 +67,13 @@ version = module_version
 install {
     repositories.mavenInstaller {
         pom.project {
-            name 'Core utilities'
-            description 'Threeplay core utilities'
+            name 'Firebase extensions'
+            description 'Threeplay firebase extensions'
             url = 'https://github.com/eliran/androidLibraries.git'
             inceptionYear = '2016'
             packaging = 'aar'
             groupId = 'com.threeplay.libraries'
-            artifactId = 'core'
+            artifactId = 'firebase'
             version = module_version
 
             licenses {
@@ -103,16 +104,17 @@ bintray {
     configurations = ['archives']
     pkg {
         repo = 'com.threeplay.libraries'
-        name = 'core'
+        name = 'firebase'
         userOrg = 'threeplay'
         licenses = ['Apache-2.0']
         vcsUrl = 'https://github.com/eliran/androidLibraries.git'
         publish = true
         version {
             name = module_version
-            desc = 'Core utilities' //Description
+            desc = 'Firebase extensions'
             released = new Date()
-            vcsTag = 'v' + module_version
+            vcsTag = module_version
         }
     }
 }
+
