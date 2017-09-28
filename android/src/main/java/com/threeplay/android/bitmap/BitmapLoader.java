@@ -7,7 +7,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.net.Uri;
-import android.util.Size;
 
 //import com.android.mms.exif.ExifInterface;
 import com.threeplay.android.fetcher.ResourceFetcher;
@@ -29,6 +28,16 @@ import java.util.List;
  */
 
 public abstract class BitmapLoader {
+
+    private class Size {
+        final int width, height;
+
+        Size(int width, int height) {
+            this.width = width;
+            this.height = height;
+        }
+    }
+
     public static Request fromResource(Resources resources, int resId){
         return new Request(new BitmapResourceLoader(resources, resId));
     }
@@ -311,7 +320,7 @@ public abstract class BitmapLoader {
         }
 
         BitmapFactory.Options decodeOptionsWithBounds(Size size){
-            return decodeOptionsWithBounds(size.getWidth(), size.getHeight());
+            return decodeOptionsWithBounds(size.width, size.height);
         }
     }
 

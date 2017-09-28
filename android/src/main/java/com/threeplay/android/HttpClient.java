@@ -1,6 +1,5 @@
 package com.threeplay.android;
 
-import android.os.AsyncTask;
 import android.util.Log;
 
 import com.threeplay.core.Promise;
