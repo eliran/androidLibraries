@@ -2,8 +2,8 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
 
-def firebaseVersion = '10.0.0'
-def module_version = '0.1.3'
+def firebaseVersion = '11.8.0'
+def module_version = '0.1.4'
 
 android {
     compileSdkVersion 25
